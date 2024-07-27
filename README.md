@@ -10,4 +10,4 @@ This is an extremely minimal app. Users are able to sign up, login, upload/downl
 - Node
 - Postgresql@16
 
-You will need a **.env** file with your postgresql's **DATABASE_URL**. Then download required packages with `npm i`,apply a migrate with `npx prisma migrate dev`, run the server `npx run start` and access via localhost:3000.
+You will need a **.env** file with your postgresql's **DATABASE_URL**. Then download required packages with `npm i`, apply a migrate with `npx prisma migrate dev`, run the server `npm run start` and access via localhost:3000.
