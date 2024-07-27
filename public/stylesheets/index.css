@@ -1,0 +1,48 @@
+@import url(./shared.css);
+
+body {
+    padding: 50px;
+}
+
+a {
+    padding: 10px 10px;
+}
+header {
+    position: sticky;
+    display: flex;
+    flex: 1;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 2rem;
+    box-shadow: 0px 4px black;
+}
+
+header .title-bar {
+    font-weight: 800;
+    text-align: center;
+}
+
+header .links {
+    display: flex;
+    gap: 2rem;
+
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-weight: 400;
+    font-size: 1.8rem;
+    margin-top: 8rem;
+
+    .description {
+        margin-top: 40px;
+        width: min(60rem, 80vw);
+    }
+}
+
+a {
+    color: #00B7FF;
+}

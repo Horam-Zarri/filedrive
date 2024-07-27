@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/index.css' />
+  </head>
+  <body>
+  
+    <header>
+      <div class="title-bar">
+        <h1>
+          <%= title %>
+        </h1>
+      </div>
+  
+      <nav class="links">
+        <% if (user) { %>
+          <a href="/log-out">Log Out</a>
+          <a href="/drive">Drive</a>
+        <% } else { %>
+          <a href="/login">Login</a>
+          <a href="/sign-up">Sign Up</a>
+        <% } %>
+      </nav>
+    </header>
+  
+    <main>
+      <h2>YOUR TRUSTED ONLINE STORAGE</h2>
+      <p class="description">
+        A simple yet intuitive online drive to accomodate your
+        storage needs. This is a platform built with privacy 
+        and ease of use in mind. 
+      </p>
+      <% if (user) { %>
+        <a href="/drive">Access Drive</a>
+        <% }else{ %>
+          <a href="/sign-up">Get Started</a>
+          <% } %>
+    </main>
+  </body>
+  
+  </html>

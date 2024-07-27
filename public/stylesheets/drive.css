@@ -1,0 +1,121 @@
+@import url('./shared.css');
+
+body {
+    padding: 50px;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+header {
+    display: flex;
+    gap: 10px;
+    font-weight: 800;
+    font-size: 2rem;
+}
+
+img {
+    width: 1.8rem;
+    height: 1.8rem;
+}
+
+.dropdown {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid black;
+    font-size: 2rem;
+    font-weight: 400;
+}
+.menu-button {
+    background-color: inherit;
+    border: none;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+}
+
+.menu-button.closed {
+    background-image: url('../icons/more_vert_black.svg');
+}
+
+.menu-button.open {
+    background-image: url('../icons/close_black.svg');
+}
+
+.dropdown-items {
+    display: none;
+}
+
+
+.dropdown-items.show {
+    display: flex;
+    flex-direction: column;
+}
+
+#dialog {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    height: 300px;
+    width: 400px;
+    transform: translateX(-50%) translateY(-50%);
+}
+
+.dropdown-items {
+    padding: 8px;
+}
+.dropdown-items > button {
+    background: none;
+    color: inherit;
+    cursor: pointer;
+    outline: inherit;
+    border: none;
+    font: inherit;
+    font-size: 2rem;
+}
+
+.file-stat {
+    display: grid;
+    width: 100%;
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: max-content;
+    & a {
+        text-decoration: underline;
+    }
+    & a:last-child {
+        margin-left: clamp(1vw, 1.6rem, 140px);
+    }
+}
+
+.file-size,
+.file-util {
+    justify-self: end;
+    word-break: keep-all;
+}
+
+.folder-stat {
+    display: grid;
+    width: 100%;
+    grid-template-columns: repeat(4, 1fr);
+    grid-auto-rows: max-content;
+    & a {
+        text-decoration: underline;
+    }
+}
+
+.folder-desc {
+    grid-column: 1 / 4;
+}
+.folder-util {
+    justify-self: end;
+}
+main {
+    word-break: break-all;
+    margin-top: min(8rem, 50px);
+    font-size: clamp(.8rem, 2vw, 2rem);
+}
+

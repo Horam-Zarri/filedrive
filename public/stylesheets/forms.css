@@ -1,0 +1,41 @@
+@import url(./shared.css);
+
+
+input {
+    border:1px solid black;    
+    font-size: 1rem;
+    padding-inline: .5rem;
+    padding-block: .4rem;
+}
+
+label {
+    font-family: 'HelveticaNeue';
+    font-weight: 800;
+}
+
+form {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 65vw;
+    transform: translateX(-50%) translateY(-50%);
+
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    row-gap: 20px;
+    grid-auto-rows: auto;
+
+    
+    & p {
+        grid-column: span 2;
+    }
+    & button {
+        grid-column: span 2;
+        padding-block: .5rem;
+        background: none;
+        font: inherit;
+        font-weight: 800;
+        font-size: 1.6rem;
+        border: 1px solid black
+    }
+}

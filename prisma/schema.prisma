@@ -1,0 +1,49 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Session {
+    id  String  @id
+    sid String @unique
+    data String  
+    expiresAt DateTime
+}
+model User {
+    id  Int     @id @default(autoincrement())
+    username String @db.VarChar(255)
+    email String 
+    password String
+    rootFolder Folder @relation(fields: [rootFolderId], references: [id])
+    rootFolderId Int @unique
+}
+
+// One to many self relation
+model Folder {
+  id Int @id @default(autoincrement())
+  name String @db.VarChar(255)
+  createdAt DateTime @default(now())
+
+  // Folder either has a parent folder or is
+  // the root folder and has a user relation
+  parentFolderId Int?
+  user User?
+  parentFolder Folder? @relation("DirectoryHierarchy", fields: [parentFolderId], references: [id]) 
+  subFolders Folder[] @relation("DirectoryHierarchy")
+  files File[]
+}
+
+model File {
+  id Int @id @default(autoincrement())
+  name String
+  path String
+  size Int
+  uploadedAt DateTime @default(now())
+
+  folder Folder @relation(fields: [folderId], references: [id])
+  folderId Int
+}

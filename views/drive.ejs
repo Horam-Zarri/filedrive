@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/stylesheets/drive.css">
+    <title>Drive</title>
+
+    <script>
+
+
+        function toggleMenu() {
+            const menu = document.querySelector(".menu-button");
+            const dropdown = document.querySelector(".dropdown-items");
+            if (menu.classList.contains('open')) {
+                menu.classList = "menu-button closed";
+                dropdown.classList.remove("show");
+            } else {
+                menu.classList = "menu-button open";
+                dropdown.classList.add("show");
+            }
+        }
+
+        function promptFolderCreate() {
+            formAction = "createFolder";
+            const form = document.querySelector("form");
+            const inputs = document.querySelector(".form-inputs-wrapper");
+            inputs.innerHTML = "";
+            form.enctype = "application/x-www-form-urlencoded";
+
+            const nameInput = document.createElement("input");
+            const nameLabel = document.createElement("label");
+
+            nameInput.type = "text";
+            nameInput.id = "name-input";
+            nameInput.name = "name";
+
+            nameLabel.for = "name-input";
+            nameLabel.textContent = "Folder Name: ";
+
+            inputs.appendChild(nameLabel);
+            inputs.appendChild(nameInput);
+            showDialog();
+        }
+
+        function promptFileUpload() {
+            formAction = "uploadFile";
+
+            const form = document.querySelector("form");
+            const inputs = document.querySelector(".form-inputs-wrapper");
+            form.enctype = "multipart/form-data";
+            inputs.innerHTML = "";
+
+            const fileInput = document.createElement("input");
+            const fileLabel = document.createElement("label");
+
+            fileInput.type = "file";
+            fileInput.id = "file-input";
+            fileInput.name = "file";
+
+            fileLabel.for = "file-input";
+            fileLabel.textContent = "Select File: ";
+
+            inputs.appendChild(fileLabel);
+            inputs.appendChild(fileInput);
+
+            showDialog();
+        }
+        function showDialog() {
+            const dialog = document.querySelector("#dialog");
+            dialog.showModal();
+        }
+
+        let formAction = "";
+
+        function formSetAction() {
+            const url = window.location.href;
+            let action = "";
+
+            if (url.endsWith('/')) {
+                action = url + formAction;
+            } else {
+                action = url + '/' + formAction;
+            }
+
+            document.querySelector("form").action = action;
+        }
+
+
+    </script>
+</head>
+
+<body>
+
+    <!--
+        <form method="post" action="/drive/upload" enctype="multipart/form-data">
+            <label for="file">File: </label>
+            <input type="file" id="file" name="file">
+            <button type="submit">Submit</button>
+        </form>
+    -->
+    <header>
+        <a href="/drive">YOUR DRIVE</a>
+        <% for (let i=0; i < dirPaths.length; ++i) { %>
+            <img src="/icons/arrow_forward_black.svg">
+            <a href="<%= dirPathIds[i] %>">
+                <%= dirPaths[i] %>
+            </a>
+            <% } %>
+
+                <div class="dropdown">
+                    <button class="menu-button closed" onclick="toggleMenu()"></button>
+                    <div class="dropdown-items">
+                        <button onclick="promptFolderCreate()">Create New Folder</button>
+                        <button onclick="promptFileUpload()">Upload File</button>
+                    </div>
+
+                </div>
+    </header>
+
+    <dialog id="dialog">
+        <form method="post" onsubmit="formSetAction()">
+            <div class="form-inputs-wrapper">
+
+            </div>
+
+            <div class="form-btns-wrapper">
+                <button value="cancel" formmethod="dialog">Cancel</button>
+                <button type="submit">Submit</button>
+            </div>
+
+        </form>
+    </dialog>
+    <main>
+        <% for (const sub of folder.subFolders) { %>
+            <div class="folder-stat">
+                <div class="folder-desc">
+                <p><a href=<%=sub.id %>><%= sub.name %> /</a></p>
+
+                </div>
+                <div class="folder-util">
+                    <a href="/drive/folders/<%= sub.id%>/deleteFolder">Delete</a>
+                </div>
+            </div>
+            <% } %>
+                <% for (const file of folder.files) { %>
+                    <div class="file-stat">
+                        <div class="file-desc">
+                            <p>
+                                <%= file.name %>
+                            </p>
+                        </div>
+                        <div class="file-size">
+                            <p>
+                                <%= file.size %>B
+                            </p>
+                        </div>
+                        <div class="file-util">
+                            <a href="/drive/files/<%=file.id %>">Download</a>
+                            <a href="/drive/files/<%=file.id %>/delete">Delete</a>
+                        </div>
+                    </div>
+                    <% } %>
+                        </main>
+                        </body>
+            
+                        </html>
